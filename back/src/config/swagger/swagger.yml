@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: Clean Route API
+  description: API para gerenciamento de clientes e cálculo da melhor rota
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+paths:
+  /customers:
+    get:
+      summary: Retorna todos os clientes
+      parameters:
+        - name: name
+          in: query
+          description: Filtrar por nome do cliente
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: Filtrar por email do cliente
+          schema:
+            type: string
+        - name: phone
+          in: query
+          description: Filtrar por telefone do cliente
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso ao obter clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '500':
+          description: Erro ao buscar clientes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Cria um novo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCustomer'
+      responses:
+        '201':
+          description: Sucesso ao criar cliente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '500':
+          description: Erro ao criar cliente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /best-route:
+    get:
+      summary: Calcula a melhor rota
+      responses:
+        '200':
+          description: Sucesso ao calcular a melhor rota
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  route:
+                    type: string
+                    example: A -> B -> C
+        '500':
+          description: Erro ao calcular a melhor rota
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 123e4567-e89b-12d3-a456-426614174000
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@example.com
+        phone:
+          type: string
+          example: +1234567890
+        x_axis:
+          type: integer
+          example: 10
+        y_axis:
+          type: integer
+          example: 20
+    NewCustomer:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@example.com
+        phone:
+          type: string
+          example: +1234567890
+        x_axis:
+          type: integer
+          example: 10
+        y_axis:
+          type: integer
+          example: 20
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Erro interno no servidor

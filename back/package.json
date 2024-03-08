@@ -1,0 +1,43 @@
+{
+  "name": "clean-route-app-back",
+  "version": "1.0.0",
+  "description": "Code Challenge backend",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon src/index.ts",
+    "build": "tsc && cp -r src/config/swagger dist/config/swagger",
+    "start": "node dist/index.js",
+    "migration": "node dist/config/database/migrations/001_create_customer_table.js",
+    "lint": "eslint --fix .",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.25",
+    "express": "^4.18.3",
+    "pg": "^8.11.3",
+    "swagger-ui-express": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/pg": "^8.11.2",
+    "@types/swagger-ui-express": "^4.1.6",
+    "@types/yamljs": "^0.2.34",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "ts-jest": "^29.1.2"
+  }
+}
