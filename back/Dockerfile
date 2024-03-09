@@ -21,7 +21,7 @@ COPY . .
 RUN npm run build
 
 # Exponha a porta 3000 para o tráfego externo
-EXPOSE 3000
+EXPOSE 3001
 
 # Defina uma variável de ambiente para indicar ao PostgreSQL para executar o arquivo de migração
 ENV POSTGRES_USER: postgres
