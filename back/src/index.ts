@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
 import * as YAML from 'yamljs';
 import * as path from 'path';
+import cors from 'cors';
 
 // Carrega o arquivo YAML do Swagger como um objeto JavaScript
 const swaggerDocument = YAML.load(path.join(__dirname, 'config/swagger/swagger.yml'))
@@ -16,6 +17,8 @@ const app = express();
 
 // Configurar o body-parser para analisar solicitações do tipo JSON
 app.use(bodyParser.json());
+
+app.use(cors())
 
 // Configurar o body-parser para analisar solicitações do tipo URL encoded
 app.use(bodyParser.urlencoded({ extended: true }));
