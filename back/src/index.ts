@@ -29,13 +29,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Configuração das rotas
 app.use(router);
 
-// Outras configurações e rotas da aplicação...
-
-// Rota de exemplo
-app.get('/', (req, res) => {
-  res.send('Bem-vindo à API de Gerenciamento de Clientes');
-});
-
 // Inicia o servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

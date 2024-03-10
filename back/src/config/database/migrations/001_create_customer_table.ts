@@ -10,7 +10,7 @@ async function runMigration() {
     await client.query(`DO $$
     BEGIN
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-        IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = 'customer') THEN
+        IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = 'customers') THEN
             -- Criação da tabela de clientes
             CREATE TABLE customers (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
