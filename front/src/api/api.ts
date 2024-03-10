@@ -5,7 +5,6 @@ import {  CustomerRequestType } from '../types/ClientsType';
 const BASE_URL = 'http://localhost:3001';
 
 export const fetchCustomers = async (filter: Record<string, string> | undefined) => { 
-  console.log("API",filter)
   try {
     const response = await axios.get(`${BASE_URL}/customers`, { params:  filter  });
     return response.data;
