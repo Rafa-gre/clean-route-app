@@ -15,8 +15,8 @@ export default function CreateCustomerForm() {
     name: '',
     email: '',
     phone: '',
-    xAxis: 0,
-    yAxis: 0
+    x_axis: 0,
+    y_axis: 0
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -52,16 +52,18 @@ export default function CreateCustomerForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (validateForm()) {
       try {
+        console.log(formData)
         await createCustomer(formData);
         // Limpar os campos após o envio bem-sucedido, se necessário
         setFormData({
           name: '',
           email: '',
           phone: '',
-          xAxis: 0,
-          yAxis: 0
+          x_axis: 0,
+          y_axis: 0
         });
         // Exibir uma mensagem de sucesso para o usuário, se necessário
         toast({
@@ -132,8 +134,9 @@ export default function CreateCustomerForm() {
             <Label htmlFor="x" className="pl-2">X</Label>
             <Input 
               id="x" 
-              name="xAxis"
-              value={formData.xAxis} 
+              name="x_axis"
+              type="number"
+              value={formData.x_axis} 
               onChange={handleNumberChange} 
               placeholder="Digite a coordenada X"
             />
@@ -142,8 +145,9 @@ export default function CreateCustomerForm() {
             <Label htmlFor="y" className="pl-2">Y</Label>
             <Input 
               id="y" 
-              name="yAxis"
-              value={formData.yAxis} 
+              name="y_axis"
+              type="number"
+              value={formData.y_axis} 
               onChange={handleNumberChange} 
               placeholder="Digite a coordenada Y"
             />

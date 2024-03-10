@@ -1,4 +1,4 @@
-export interface CustomerRequestType extends Omit<Customer, 'id'> {}
+export interface CustomerRequestType extends Omit<CustomerRoute, 'id'> {}
 export interface CustomerList extends Omit<Customer, 'xAxis' | 'yAxis'> {}
 export interface CustomerRoute extends Omit<Customer, 'xAxis' | 'yAxis'> {
   x_axis:number

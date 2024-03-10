@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import ChevronDownIcon from "../Icons/ChevronDown"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { fetchCustomers } from "../../api/api";
 import { CustomerList } from "../../types/ClientsType";
 import CreateCustomerForm from "../CreateCustomerForm/CreateCustomerForm";
@@ -15,12 +15,27 @@ export default function TablePage() {
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isRouteModalOpen, setRouteModalOpen] = useState(false);
 
+  const fetchData = useCallback(async () => {
+    try {
+      const data = await fetchCustomers();
+      setCustomers(data);
+    } catch (error) {
+      toast({
+        title: "Erro",
+        description: `Erro ao buscar cliente: ${error}`,
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
+  }, [toast]);
+
   const openCreateModal = () => {
     setCreateModalOpen(true);
   };
 
   const closeCreateModal = () => {
     setCreateModalOpen(false);
+    fetchData();
   };
 
   const openRouteModal = () => {
@@ -32,22 +47,8 @@ export default function TablePage() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchCustomers();
-        setCustomers(data);
-      } catch (error) {
-        toast({
-          title: "Erro",
-          description: `Erro ao buscar cliente: ${error}`,
-          variant: "destructive",
-          duration: 3000,
-        });
-      }
-    };
-
     fetchData();
-  }, [toast]);
+  }, [fetchData]);
 
   return (
     <div className="flex flex-col w-full min-h-screen">
