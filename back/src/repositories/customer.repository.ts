@@ -50,6 +50,20 @@ class CustomerRepository {
       client.release();
     }
   }
+
+  async getCustomerByEmail(email: string): Promise<Customer | null> {
+    const client = await this.db.connect();
+    try {
+      const query = 'SELECT * FROM customers WHERE email = $1';
+      const result = await client.query(query, [email]);
+      if (result.rows.length === 0) {
+        return null;
+      }
+      return result.rows[0] as Customer;
+    } finally {
+      client.release();
+    }
+  }
 }
 
 export default CustomerRepository;

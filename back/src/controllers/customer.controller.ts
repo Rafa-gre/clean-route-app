@@ -27,6 +27,9 @@ class CustomerController {
       const newCustomer = await customerService.createCustomer({ name, email, phone, x_axis, y_axis});
       res.status(201).json(newCustomer);
     } catch (error: Error | any) {
+      if (error.message.includes('Já existe um cliente cadastrado com esse email.')) {
+        return res.status(400).json({ message: 'Email duplicado', error: error.message });
+      }
       res.status(500).json({ message: 'Erro ao criar cliente', error: error.message });
     }
   }

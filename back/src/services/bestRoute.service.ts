@@ -117,9 +117,6 @@ class BestRouteService {
     totalDistance += this.calculateDistance(route[route.length - 1], route[0]);
     return totalDistance;
   }
-  
-  
-  
 }
 
 export default BestRouteService

@@ -15,6 +15,11 @@ class CustomerService {
   }
 
   async createCustomer(customerData: CreateCustomer): Promise<Customer> {
+
+    const customer = await this.customerRepository.getCustomerByEmail(customerData.email);
+    if (customer) {
+      throw new Error('Já existe um cliente cadastrado com esse email.');
+    }
     // Sanitização dos dados antes de salvar no banco de dados
     const { name, email, phone, x_axis, y_axis } = customerData;
     const sanitizedCustomerData = {
@@ -28,19 +33,14 @@ class CustomerService {
     return await this.customerRepository.createCustomer(newCustomer);
   }
 
-  // Função para sanitizar strings (remover caracteres especiais, etc.)
-
-
   // Função para validar o formato do email
   private validateEmail(email: string): string {
     // Expressão regular para validar o formato do email
     const emailRegex = /\S+@\S+\.\S+/;
     // Testa se o email corresponde ao formato esperado
     if (!emailRegex.test(email)) {
-      // Se o email não for válido, lança um erro
       throw new Error('Email inválido');
     }
-    // Se o email for válido, retorna-o
     return email;
   }
 
@@ -48,10 +48,8 @@ class CustomerService {
   private formatPhone(phone: string): string {
     // Remove todos os caracteres não numéricos da string
     const formattedPhone = phone.replace(/\D/g, '');
-    // Retorna o número de telefone formatado
     return formattedPhone;
   }
-
 }
 
 export default CustomerService;
