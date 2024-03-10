@@ -12,6 +12,10 @@ O backend do CleanRouteApp foi desenvolvido utilizando Node.js e Express.js para
 
 Para calcular a rota mais curta entre os pontos de entrega, utilizamos o algoritmo do vizinho mais próximo otimizado pelo 2-opt. Esse algoritmo combina a eficiência do método do vizinho mais próximo com a otimização do 2-opt, garantindo rotas eficientes e econômicas.
 
+### DDL da Tabela do Banco de Dados
+
+O script SQL para criar a tabela do banco de dados está disponível na pasta `back/src/config/database/migrations`. Este script contém o DDL (Linguagem de Definição de Dados) necessário para definir a estrutura da tabela utilizada pelo aplicativo. Esse script é executado automaticamente caso a tabela não exista em seu banco de dados.
+
 ### Frontend
 
 O frontend do CleanRouteApp foi construído utilizando tecnologias modernas como React.js para a criação de uma interface de usuário responsiva e intuitiva. Para o gerenciamento de estado da aplicação, utilizamos o React Hooks, proporcionando um desenvolvimento mais eficiente e organizado.
