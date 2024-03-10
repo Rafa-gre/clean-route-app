@@ -34,7 +34,6 @@ export default function CreateCustomerForm() {
     }
 
     setErrors(newErrors);
-    console.log(newErrors)
     return Object.keys(newErrors).length === 0;
   };
 

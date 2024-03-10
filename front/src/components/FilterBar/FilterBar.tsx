@@ -17,7 +17,6 @@ export default function FilterBar({ setFilter }: FilterBarProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchValue(value);
-    console.log("Search Value", value);
   };
 
   useEffect(() => {

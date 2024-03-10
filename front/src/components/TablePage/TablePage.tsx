@@ -21,7 +21,6 @@ export default function TablePage() {
 
   const fetchData = useCallback(async () => {
     try {
-      console.log("filter",filter)
       const data = await fetchCustomers(filter);
       setCustomers(data);
     } catch (error) {
