@@ -1,23 +1,28 @@
-import { Button } from "@/components/ui/button"
-import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
-import ChevronDownIcon from "../Icons/ChevronDown"
+// TablePage.tsx
+
+import { Button } from "@/components/ui/button";
+import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table";
+import ChevronDownIcon from "../Icons/ChevronDown";
 import { useCallback, useEffect, useState } from "react";
 import { fetchCustomers } from "../../api/api";
 import { CustomerList } from "../../types/ClientsType";
 import CreateCustomerForm from "../CreateCustomerForm/CreateCustomerForm";
 import { useToast } from "../ui/use-toast";
 import RouteList from "../RouteList/RouteList";
+import FilterBar from "../FilterBar/FilterBar";
 
 export default function TablePage() {
-  const {toast} = useToast()
+  const { toast } = useToast();
 
   const [customers, setCustomers] = useState<CustomerList[]>([]);
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isRouteModalOpen, setRouteModalOpen] = useState(false);
+  const [filter, setFilter] = useState<Record<string, string> | undefined>(); // Defina o tipo corretamente
 
   const fetchData = useCallback(async () => {
     try {
-      const data = await fetchCustomers();
+      console.log("filter",filter)
+      const data = await fetchCustomers(filter);
       setCustomers(data);
     } catch (error) {
       toast({
@@ -27,7 +32,9 @@ export default function TablePage() {
         duration: 3000,
       });
     }
-  }, [toast]);
+  }, [toast, filter]);
+  
+
 
   const openCreateModal = () => {
     setCreateModalOpen(true);
@@ -81,6 +88,12 @@ export default function TablePage() {
           </div>
         )}
       </header>
+      <div className="flex items-center p-4">
+        <div className="flex justify-around border rounded-lg bg-blue-100 w-full">
+        <h2 className="flex items-center p-4">Filtrar</h2>
+          <FilterBar setFilter={setFilter} />
+        </div>
+      </div>
       <main className="flex-1 p-4 grid items-start gap-4 md:p-6 ">
         <div className="border rounded-lg w-full">
           <Table>

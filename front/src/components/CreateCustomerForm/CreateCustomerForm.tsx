@@ -55,7 +55,6 @@ export default function CreateCustomerForm() {
 
     if (validateForm()) {
       try {
-        console.log(formData)
         await createCustomer(formData);
         // Limpar os campos após o envio bem-sucedido, se necessário
         setFormData({
