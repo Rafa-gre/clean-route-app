@@ -50,6 +50,12 @@ docker-compose up
 
 5. Acesse a documentação da API (Swagger) em [http://localhost:3001/api-docs](http://localhost:3001/api-docs).
 
+## Video Explicativo
+
+O arquivo do vídeo explicativo se encontra no repositório porém caso haja algum problema também esta disponível no link abaixo
+
+[Video Explicativo](https://www.loom.com/share/732f4f27c5794e9f8d437713dd4e7a4c)
+
 ## Requisitos de Sistema
 
 - Node.js >= 18.16.0
